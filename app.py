@@ -8,7 +8,11 @@ import pymysql
 pymysql.install_as_MySQLdb()
 
 app = Flask(__name__)
-CORS(app, origins=["https://cs-3430.vercel.app"])
+CORS(app, origins=[
+    "https://cs-3430.vercel.app",
+    "http://127.0.0.1:5500",
+    "http://localhost:5500"
+])
 
 # ==========================
 # DATABASE CONFIG
