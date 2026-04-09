@@ -20,11 +20,11 @@ import os
 
 import os
 
-MYSQLHOST = os.getenv('MYSQLHOST')
-MYSQLUSER = os.getenv('MYSQLUSER')
-MYSQLPASSWORD = os.getenv('MYSQLPASSWORD')
-MYSQLDATABASE = os.getenv('MYSQLDATABASE')
-MYSQLPORT = os.getenv('MYSQLPORT')
+MYSQLHOST = os.getenv('junction.proxy.rlwy.net')
+MYSQLUSER = os.getenv('root')
+MYSQLPASSWORD = os.getenv('syBsbpnrmENmWGCOqfLNeFzGOnNpGsRF')
+MYSQLDATABASE = os.getenv('railway')
+MYSQLPORT = os.getenv('21099')
 
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
