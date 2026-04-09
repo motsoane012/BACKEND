@@ -6,11 +6,6 @@ from datetime import datetime
 import pymysql
 
 app = Flask(__name__)
-@app.route('/health')
-def health():
-    return jsonify({"status": "ok"})
-
-
 CORS(app, resources={r"/*": {"origins": [
     "https://cs-3430.vercel.app",
     "https://cs-3430-git-main-motsoane012s-projects.vercel.app",
