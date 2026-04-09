@@ -1,11 +1,9 @@
 from flask import Flask, request, jsonify, render_template
-from flask_mysqldb import MySQL
 from flask_cors import CORS
 import hashlib
 import uuid
 from datetime import datetime
 import pymysql
-pymysql.install_as_MySQLdb()
 
 app = Flask(__name__)
 CORS(app, origins=[
@@ -19,13 +17,15 @@ CORS(app, origins=[
 # ==========================
 import os
 
-app.config['MYSQL_HOST'] = os.environ.get('MYSQLHOST')
-app.config['MYSQL_USER'] = os.environ.get('MYSQLUSER')
-app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQLPASSWORD')
-app.config['MYSQL_DB'] = os.environ.get('MYSQLDATABASE')
-app.config['MYSQL_PORT'] = int(os.environ.get('MYSQLPORT', 3306))
-
-mysql = MySQL(app)
+def get_db():
+    return pymysql.connect(
+        host=os.environ.get('MYSQLHOST'),
+        user=os.environ.get('MYSQLUSER'),
+        password=os.environ.get('MYSQLPASSWORD'),
+        database=os.environ.get('MYSQLDATABASE'),
+        port=int(os.environ.get('MYSQLPORT', 3306)),
+        cursorclass=pymysql.cursors.Cursor
+    )
 
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
