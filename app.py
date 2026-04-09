@@ -4,6 +4,8 @@ from flask_cors import CORS
 import hashlib
 import uuid
 from datetime import datetime
+import pymysql
+pymysql.install_as_MySQLdb()
 
 app = Flask(__name__)
 CORS(app, origins=["https://cs-3430.vercel.app"])
