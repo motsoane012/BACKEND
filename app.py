@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://cs-3430.vercel.app"])
 
 # ==========================
 # DATABASE CONFIG
