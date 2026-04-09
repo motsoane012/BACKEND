@@ -18,15 +18,13 @@ CORS(app, resources={r"/*": {"origins": [
 # ==========================
 import os
 
-def get_db():
-    return pymysql.connect(
-        host=os.environ.get('MYSQLHOST'),
-        user=os.environ.get('MYSQLUSER'),
-        password=os.environ.get('MYSQLPASSWORD'),
-        database=os.environ.get('MYSQLDATABASE'),
-        port=int(os.environ.get('MYSQLPORT', 3306)),
-        cursorclass=pymysql.cursors.Cursor
-    )
+import os
+
+MYSQLHOST = os.getenv('MYSQLHOST')
+MYSQLUSER = os.getenv('MYSQLUSER')
+MYSQLPASSWORD = os.getenv('MYSQLPASSWORD')
+MYSQLDATABASE = os.getenv('MYSQLDATABASE')
+MYSQLPORT = os.getenv('MYSQLPORT')
 
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
