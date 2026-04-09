@@ -19,13 +19,19 @@ CORS(app, resources={r"/*": {"origins": [
 import os
 
 import os
+# Database connection (with fallback for local dev)
+mysql = pymysql.connect(
+    host=os.getenv('MYSQLHOST', 'junction.proxy.rlwy.net'),
+    user=os.getenv('MYSQLUSER', 'root'),
+    password=os.getenv('MYSQLPASSWORD', 'syBsbpnrmENmWGCOqfLNeFzGOnNpGsRF'),
+    database=os.getenv('MYSQLDATABASE', 'railway'),
+    port=int(os.getenv('MYSQLPORT', 21099)),
+    autocommit=True  # Add this
+)
 
-MYSQLHOST = os.getenv('junction.proxy.rlwy.net')
-MYSQLUSER = os.getenv('root')
-MYSQLPASSWORD = os.getenv('syBsbpnrmENmWGCOqfLNeFzGOnNpGsRF')
-MYSQLDATABASE = os.getenv('railway')
-MYSQLPORT = os.getenv('21099')
-
+@app.teardown_appcontext
+def close_db(error):
+    mysql.close()
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
